@@ -1,0 +1,38 @@
+name: microsample
+version: '0.1' 
+summary: An educational snap for a snapped flask microservice.
+description: |
+  Endpoint json: http://hostip:8080/api/info
+  Endpoint to get service status: http://hostip:8080/  (Will return "Online" if OK)
+
+  change host/port with snap:
+  
+  sudo snap set microsample host=127.0.0.1 port=9090
+  
+  Author: Erik Lonroth erik.lonroth@gmail.com
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+base: core
+
+apps:
+  microsample:
+    command: python3 -m flask run -h "$(snapctl get host)" -p "$(snapctl get port)"
+    daemon: simple
+    restart-condition: always
+    plugs: [network-bind]
+    environment:
+      FLASK_APP: ./server.py
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+       
+
+parts:
+   flask-app:
+     source: .
+     plugin: python
+     python-version: python3 
+     python-packages: 
+       - flask

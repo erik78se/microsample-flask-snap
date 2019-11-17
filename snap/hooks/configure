@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+host="$(snapctl get host)"
+port="$(snapctl get port)"
+
+if [ -z "$host" ]
+then
+      echo "\$host is empty"
+      exit 1
+fi
+
+if [ -z "$port" ]
+then
+      echo "\$port is empty"
+      exit 1 
+fi
+
