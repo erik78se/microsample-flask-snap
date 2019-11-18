@@ -1,4 +1,4 @@
 #!/bin/bash
 # Defaults when install
-snapctl set host=0.0.0.0
+snapctl set address=0.0.0.0
 snapctl set port=8080

@@ -7,7 +7,7 @@ description: |
 
   change host/port with snap:
   
-  sudo snap set microsample host=127.0.0.1 port=9090
+  sudo snap set microsample bind_address=127.0.0.1 port=9090
   
   Author: Erik Lonroth erik.lonroth@gmail.com
 
@@ -19,7 +19,7 @@ base: core
 
 apps:
   microsample:
-    command: python3 -m flask run -h "$(snapctl get host)" -p "$(snapctl get port)"
+    command: python3 -m flask run -h "$(snapctl get bind_address)" -p "$(snapctl get port)"
     daemon: simple
     restart-condition: always
     plugs: [network-bind]
