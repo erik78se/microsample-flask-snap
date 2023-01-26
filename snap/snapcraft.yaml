@@ -1,9 +1,8 @@
 name: microsample
 version: git
-summary: An educational snap for a snapped flask microservice.
+summary: A simple flask microservice on 0.0.0.0:8080
 description: |
-  Endpoint json: http://hostip:8080/api/info
-  Endpoint to get service status: http://hostip:8080/  (Will return "Online" if OK)
+  Get service status with: curl http://hostip:8080/  (Will return "Online" if OK)
 
 grade: devel # must be 'stable' to release into candidate/stable channels
 
@@ -17,7 +16,7 @@ base: core22
 
 apps:
   microsample:
-    command: bin/flask run -h 0.0.0.0
+    command: bin/flask run -h 0.0.0.0 -p 8080
     daemon: simple
     restart-condition: always
     plugs: [network-bind]
@@ -27,10 +26,20 @@ apps:
       LANG: C.UTF-8
 
 parts:
-  flask-server:
-    # See 'snapcraft plugins'
-    plugin: python 
+
+# This installs flask using python pip.
+  python-flask:
+    plugin: python
     source: .
     python-packages: [ flask ]
-    prime: 
-      - server.py
+    
+# This dumps our sources including server.py
+# where we manually have to copy the server.py
+# into place.
+  flask-server:
+    plugin: dump
+    source: .
+# flask could be installed like this instead in the plugin.
+#    stage-packages: [ python3-flask ]
+    organize:
+      server.py: bin/
