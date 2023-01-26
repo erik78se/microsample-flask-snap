@@ -5,12 +5,6 @@ description: |
   Endpoint json: http://hostip:8080/api/info
   Endpoint to get service status: http://hostip:8080/  (Will return "Online" if OK)
 
-  change host/port with snap:
-  
-  sudo snap set microsample address=127.0.0.1 port=9090
-  
-  Author: Erik Lonroth erik.lonroth@gmail.com
-
 grade: devel # must be 'stable' to release into candidate/stable channels
 
 confinement: strict # use 'strict' once you have the right plugs and slots
@@ -23,8 +17,7 @@ base: core22
 
 apps:
   microsample:
-    command: venv/bin/start-server
-    # command: python3 -m flask run -h "$(snapctl get address)" -p "$(snapctl get port)"
+    command: bin/flask run -h 0.0.0.0
     daemon: simple
     restart-condition: always
     plugs: [network-bind]
@@ -32,13 +25,12 @@ apps:
       FLASK_APP: ./server.py
       LC_ALL: C.UTF-8
       LANG: C.UTF-8
-       
+
 parts:
-    flask-app:
-      source: https://github.com/erik78se/microsample-flask-snap.git
-      plugin: python 
-      python-requirements: [ ./requirements.txt ]
-      override-pull: |
-        snapcraftctl pull
-        snapcraftctl set-version \
-        "$(git describe --long --tags --always --match=v*.*.* | sed 's/v//')"
+  flask-server:
+    # See 'snapcraft plugins'
+    plugin: python 
+    source: .
+    python-packages: [ flask ]
+    prime: 
+      - server.py
