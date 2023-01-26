@@ -1,5 +1,5 @@
 name: microsample
-version: '0.1' 
+version: git
 summary: An educational snap for a snapped flask microservice.
 description: |
   Endpoint json: http://hostip:8080/api/info
@@ -18,13 +18,13 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 # This helps, for example, build.snapcraft.io to build only on archs we can run on.
 architectures:
   - build-on: amd64
-  - build-on: arm64
 
-base: core
+base: core22
 
 apps:
   microsample:
-    command: python3 -m flask run -h "$(snapctl get address)" -p "$(snapctl get port)"
+    command: bin/start-server
+    # command: python3 -m flask run -h "$(snapctl get address)" -p "$(snapctl get port)"
     daemon: simple
     restart-condition: always
     plugs: [network-bind]
@@ -36,8 +36,6 @@ apps:
 
 parts:
    flask-app:
-     source: .
-     plugin: python
-     python-version: python3 
-     python-packages: 
-       - flask
+     source: https://github.com/erik78se/microsample-flask-snap.git
+     plugin: python 
+     python-requirements: [ ./requirements.txt ]

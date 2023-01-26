@@ -20,5 +20,9 @@ def index():
 def get_info():
     return jsonify(info)
 
+
+def main():
+    application.run()
+
 if __name__ == '__main__':
     application.run()
