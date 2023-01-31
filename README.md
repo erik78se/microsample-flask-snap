@@ -1,16 +1,6 @@
 # Description
 
-Educational flask app that exposes a development webservice on http://host:5000 
-
-## Test and development
-Create a virtual env and install flask.
-
-```
-python3 -m venv venv
-source venv/bin/activate
-pip3 install --upgrade pip
-pip install flask
-```
+Educational flask app that exposes a development webservice on http://host:8080
 
 Example running the service.
 
@@ -32,3 +22,8 @@ Get service status:
 curl -i http://localhost:8080
 ```
 
+# Build the snap
+
+```
+charmcraft
+```
