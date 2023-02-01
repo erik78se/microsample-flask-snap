@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+port="$(snapctl get port)"
+
+exec ${SNAP}/bin/flask run -h 0.0.0.0 -p $port $@

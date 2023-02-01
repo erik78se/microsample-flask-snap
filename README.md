@@ -27,3 +27,9 @@ curl -i http://localhost:8080
 ```
 snapcraft
 ```
+
+# Change the port for the service to listen on and restart to make effective.
+```
+sudo snap set microsample port=9999
+sudo systemctl restart snap.microsample.microsample.service
+```

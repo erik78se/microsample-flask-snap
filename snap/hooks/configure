@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+_port="$(snapctl get port)"
+
+# Validate it
+if ! expr "$_port" : '^[0-9]*$' > /dev/null; then
+    echo "\"$_port\" is not a valid port" >&2
+    exit 1
+fi
