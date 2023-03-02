@@ -4,8 +4,8 @@ Educational snap of a flask app that exposes a development webservice on http://
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/microsample)
 
-Example running the service.
 
+Example running the service without the snap:
 
 ```
 export FLASK_APP=./server.py
