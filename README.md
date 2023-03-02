@@ -1,8 +1,11 @@
 # Description
 
-Educational flask app that exposes a development webservice on http://host:8080
+Educational snap of a flask app that exposes a development webservice on http://host:8080
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/microsample)
 
 Example running the service.
+
 
 ```
 export FLASK_APP=./server.py
