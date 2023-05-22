@@ -25,6 +25,11 @@ Get service status:
 curl -i http://localhost:8080
 ```
 
+Get prometheus metrics (E.g. microsample_calls_total - incremented everytime a call to the API occurs)
+```
+curl -i http://localhost:8080/metrics
+```
+
 # Build the snap
 
 ```

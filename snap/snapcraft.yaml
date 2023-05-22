@@ -27,20 +27,18 @@ apps:
 
 parts:
 
-# This installs flask using python pip.
-  python-flask:
+  # Install all packages from requirements
+  python-packages:
     plugin: python
     source: .
-    python-packages: [ flask ]
+    python-requirements: ['requirements.txt']
+
     
-# This dumps our sources including server.py
-# where we manually have to copy the server.py
-# into place.
+# Use the dump plugin to place our sources (server.py etc.)
+# and copy the server.py and the wrapper script in place.
   flask-server:
     plugin: dump
     source: .
-# flask could be installed like this instead in the plugin.
-#    stage-packages: [ python3-flask ]
     organize:
       server.py: bin/
       flask-wrapper: bin/
